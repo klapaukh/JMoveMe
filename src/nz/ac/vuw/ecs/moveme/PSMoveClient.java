@@ -545,21 +545,21 @@ public class PSMoveClient implements Runnable {
 		// Read the server config
 		int num_image_slices = b.getInt();
 		int image_slice_format = b.getInt();
-		
-		//Read the client config
+
+		// Read the client config
 		int ms_delay_between_standard_packets = b.getInt();
 		int ms_delay_between_camera_frame_packets = b.getInt();
 		int cameraFramePacketPaused = b.getInt();
-		
-		//PS Move Status for each controller
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PS Move Status for each controller
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			int connected = b.getInt();
 			int code = b.getInt();
 			long flags = b.getLong();
 		}
-		
-		//PS move state for each controller
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PS move state for each controller
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			float[] pos = new float[4];
 			float[] vel = new float[4];
 			float[] accel = new float[4];
@@ -569,51 +569,51 @@ public class PSMoveClient implements Runnable {
 			float[] handlePos = new float[4];
 			float[] handleVel = new float[4];
 			float[] handleAccel = new float[4];
-			
-			for(int j=0 ; j < 4; j++){
+
+			for (int j = 0; j < 4; j++) {
 				pos[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				vel[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				accel[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				quat[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				angvel[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				angaccel[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				handlePos[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				handleVel[j] = b.getFloat();
 			}
-			for(int j=0 ; j < 4; j++){
+			for (int j = 0; j < 4; j++) {
 				handleAccel[j] = b.getFloat();
 			}
-			
-			//PS Move Pad data
+
+			// PS Move Pad data
 			short digitalButtons = b.getShort();
 			short trigger = b.getShort();
-			
-			long timestamp  = b.getLong();
+
+			long timestamp = b.getLong();
 			float temperature = b.getFloat();
 			float cameraPitchAngle = b.getFloat();
 			int trackingFlags = b.getInt();
 		}
-		
-		//PSMove image state for each controller
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PSMove image state for each controller
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			long frameTimestamp = b.getLong();
 			long timestamp = b.getLong();
 			float u = b.getFloat();
-			float v= b.getFloat();
+			float v = b.getFloat();
 			float r = b.getFloat();
 			float projectionX = b.getFloat();
 			float projectionY = b.getFloat();
@@ -621,48 +621,47 @@ public class PSMoveClient implements Runnable {
 			int visible = b.getInt();
 			int rValid = b.getInt();
 		}
-		
-		//PSMove pointer state for each controller (laser info)
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PSMove pointer state for each controller (laser info)
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			int valid = b.getInt();
 			float normalisedX = b.getFloat();
 			float normalisedY = b.getFloat();
 		}
-		
-		//PS Nav pad info
+
+		// PS Nav pad info
 		int[] portStatus = new int[PSMoveServerMaxNavs];
-		for(int i = 0 ; i < PSMoveServerMaxNavs;i++){
+		for (int i = 0; i < PSMoveServerMaxNavs; i++) {
 			portStatus[i] = b.getInt();
 		}
-		
-		//PS Nav pad data for each nav pad
-		for(int i = 0 ; i < PSMoveServerMaxNavs;i++){
+
+		// PS Nav pad data for each nav pad
+		for (int i = 0; i < PSMoveServerMaxNavs; i++) {
 			int length = b.getInt();
 			short[] button = new short[PSMoveServerCellPadMaxCodes];
-			for(int j =0 ; j < PSMoveServerCellPadMaxCodes; j++){
+			for (int j = 0; j < PSMoveServerCellPadMaxCodes; j++) {
 				button[j] = b.getShort();
 			}
 		}
-		
-		//PS Move sphere data for each controller
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PS Move sphere data for each controller
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			int tracking = b.getInt();
 			int tackingHue = b.getInt();
 			float r = b.getFloat();
 			float g = b.getFloat();
 			float blue = b.getFloat();
 		}
-		
-		//Camera State
+
+		// Camera State
 		int exposure = b.getInt();
 		float exposureTime = b.getFloat();
 		float gain = b.getFloat();
 		float pitchAngle = b.getFloat();
 		float pitchAngleEstimate = b.getFloat();
-		
-		
-		//PS Move Position Pointer state;
-		for(int i = 0 ; i < PSMoveClient.PSMoveServerMaxCons; i++){
+
+		// PS Move Position Pointer state;
+		for (int i = 0; i < PSMoveClient.PSMoveServerMaxCons; i++) {
 			int valid = b.getInt();
 			float normalisedX = b.getFloat();
 			float normalisedY = b.getFloat();
@@ -800,7 +799,7 @@ public class PSMoveClient implements Runnable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.printf("(%.3f, %.3f)\n", x, y);
+//				System.out.printf("(%.3f, %.3f)\n", x, y);
 			}
 
 			@Override
@@ -812,13 +811,27 @@ public class PSMoveClient implements Runnable {
 		try {
 			client.connect("130.195.11.193", 7899);
 			client.delayChange(2);
-			client.disableLaser(0);
-			client.disablePosition(0);
+			// client.disableLaser(0);
+			// client.disablePosition(0);
 
+			int[] col = { 0, 100, 250 };
+			int[] step = { 1, -1, 1 };
 			while (true) {
-				client.setTrackingColor((int) (Math.random() * 360), PICK_FOR_ME, PICK_FOR_ME, PICK_FOR_ME);
-				// client.forceRGB(0, 200, 200, 200);
-				Thread.sleep(6);
+				client.setTrackingColor(col[0], col[1], col[2], PICK_FOR_ME);
+				for (int i = 0; i < 3; i++) {
+					col[i] = col[i] +  step[i];
+					if (col[i] == 70) {
+						step[i] *= -1;
+						col[i] += step[i];
+					}
+					if (col[i] == -1) {
+						col[i] = 359;
+					}
+					if (col[i] == 360) {
+						col[i] = 0;
+					}
+				}
+				Thread.sleep(10);
 			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
