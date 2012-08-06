@@ -734,7 +734,7 @@ public class PSMoveClient implements Runnable {
 				lostListener.moveLost();
 			}
 			// System.out.println("Sphere not visible");
-		}else if(isLost){
+		}else if(sphereVisible && isLost){
 			isLost = false;
 			if(lostListener != null){
 				lostListener.moveRegained();
