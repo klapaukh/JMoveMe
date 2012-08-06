@@ -720,7 +720,7 @@ public class PSMoveClient implements Runnable {
 		}
 
 		float x, y;
-		if (!pointerStateValid && !posPointerStateValid) {
+		if (listener != null && !pointerStateValid && !posPointerStateValid) {
 			listener.positionUpdate(digitalButtonsPushed, buttonsHeld, buttonsReleased, analog_T);
 			return;
 		} else if (pointerStateValid) {
