@@ -72,11 +72,14 @@ public class PSMoveClient implements Runnable {
 	private DatagramPacket p;
 	private int packetSize = 655360;
 	private UpdateListener listener;
+	private MoveLostListener lostListener;
 	private volatile boolean running;
+	private boolean isLost;
 	private int buttonsDown;
 
 	public PSMoveClient() {
 		running = false;
+		isLost = false;
 		tcpClient = null;
 		udpClient = null;
 		outStream = null;
@@ -120,6 +123,19 @@ public class PSMoveClient implements Runnable {
 		this.listener = l;
 	}
 
+	
+	/**
+	 * Register a move lost listener to get updates about when the  controller has been lost. Only one such listener is active at any one time
+	 * @param l The listener to send events to
+	 */
+	public void setMoveLostListener(MoveLostListener l){
+		this.lostListener = l;
+		if(isLost){
+			l.moveLost();
+		}
+	}
+	
+	
 	/**
 	 * Close the connection with the PlayStation 3
 	 * 
@@ -712,9 +728,19 @@ public class PSMoveClient implements Runnable {
 
 		buttonsDown = digitalButtons;
 
-		if (!sphereVisible) {
+		if (!sphereVisible && !isLost) {
+			isLost = true;
+			if(lostListener != null){
+				lostListener.moveLost();
+			}
 			// System.out.println("Sphere not visible");
+		}else if(isLost){
+			isLost = false;
+			if(lostListener != null){
+				lostListener.moveRegained();
+			}
 		}
+		
 		if (!trackingEnabled) {
 			// System.out.println("Tracking not enabled");
 		}
