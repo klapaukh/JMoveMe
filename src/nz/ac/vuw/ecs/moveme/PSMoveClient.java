@@ -1,3 +1,23 @@
+/*
+ * Java Move.Me bindings.
+ *
+ * Copyright (C) 2013  Roman Klapaukh
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 package nz.ac.vuw.ecs.moveme;
 
 import java.io.IOException;
@@ -88,7 +108,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Connect to a PlayStation running the Move.Me server program
-	 * 
+	 *
 	 * @param server
 	 *            Address of the PlayStation 3
 	 * @param port
@@ -115,7 +135,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Register an update listener to get updates about the controller state. Only the last listener registered will actually get updates
-	 * 
+	 *
 	 * @param l
 	 *            The UpdateListener to register
 	 */
@@ -123,22 +143,22 @@ public class PSMoveClient implements Runnable {
 		this.listener = l;
 	}
 
-	
 	/**
-	 * Register a move lost listener to get updates about when the  controller has been lost. Only one such listener is active at any one time
-	 * @param l The listener to send events to
+	 * Register a move lost listener to get updates about when the controller has been lost. Only one such listener is active at any one time
+	 *
+	 * @param l
+	 *            The listener to send events to
 	 */
-	public void setMoveLostListener(MoveLostListener l){
+	public void setMoveLostListener(MoveLostListener l) {
 		this.lostListener = l;
-		if(isLost){
+		if (isLost) {
 			l.moveLost();
 		}
 	}
-	
-	
+
 	/**
 	 * Close the connection with the PlayStation 3
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void close() throws IOException {
@@ -154,7 +174,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Pauses the standard state packet communications
-	 * 
+	 *
 	 * @throws IOException
 	 *             If the underlying TCP output steam throws an IO Exception
 	 */
@@ -164,7 +184,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Resume the standard state packet communications if they have been paused
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void resume() throws IOException {
@@ -173,7 +193,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the delay between packets in milliseconds. 2ms Seems to be a good value
-	 * 
+	 *
 	 * @param delay_ms
 	 *            Delay between packets
 	 * @throws IOException
@@ -184,7 +204,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Comfigure the PlayStation eye camera.
-	 * 
+	 *
 	 * @param maxExposure
 	 *            The number of image rows of exposure time. The range is from 40 to 511. The longer the exposure time means decreased image noise but
 	 *            increased motion blur, which has a negative effect on sphere tracking
@@ -198,7 +218,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Calibrate a motion controller. It should be pointed at the camera and be held still.
-	 * 
+	 *
 	 * @param controller
 	 *            The index of the controller to calibrate (0-3)
 	 * @throws IOException
@@ -209,7 +229,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the left side of the laser pointer box. The controller should be pointed at the left most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -220,7 +240,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the right side of the laser pointer box. The controller should be pointed at the right most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -231,7 +251,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the bottom side of the laser pointer box. The controller should be pointed at the bottom most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -242,7 +262,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the top side of the laser pointer box. The controller should be pointed at the top most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -253,7 +273,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Enable laser tracking for the specified controller
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to enable (0-3)
 	 * @throws IOException
@@ -264,7 +284,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Disable laser tracking for the specified controller
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to disable (0-3)
 	 * @throws IOException
@@ -275,7 +295,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Reset a specified controller
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to reset (0-3)
 	 * @throws IOException
@@ -286,7 +306,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the left side of the position pointer box. The controller should be pointed at the left most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -297,7 +317,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the right side of the position pointer box. The controller should be pointed at the right most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -308,7 +328,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the bottom side of the position pointer box. The controller should be pointed at the bottom most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -319,7 +339,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the top side of the position pointer box. The controller should be pointed at the top most point.
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to set this for (0-3)
 	 * @throws IOException
@@ -330,7 +350,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Enable position tracking for the specified controller
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to enable (0-3)
 	 * @throws IOException
@@ -341,7 +361,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Disable position tracking for the specified controller
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to disable (0-3)
 	 * @throws IOException
@@ -352,9 +372,9 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Force the controller to go a specific color. This disables sphere tracking, and has a significant impact on tracking accuracy
-	 * 
+	 *
 	 * The color is in RGB. Each value ranges from 0-1
-	 * 
+	 *
 	 * @param gem_num
 	 *            Controller to set the color for (0-3)
 	 * @param r
@@ -371,7 +391,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Set the rumble (vibration) for a specific controller. Rumble is an analog value that ranges from 0 (off) to 255 (full).
-	 * 
+	 *
 	 * @param controller
 	 *            Controller to adjust (0 - 3)
 	 * @param rumble
@@ -386,7 +406,7 @@ public class PSMoveClient implements Runnable {
 	 * Set the color of the controller while still keeping tracking enabled. The hues are integers from 0-259. The hues are only requests. The hues
 	 * may be moved in order to facilitate tracking. The hues must be set for all controllers at once. To allow the system to choose a specific color
 	 * the constant PICK_FOR_ME can be used. To disable tracking of a controller the constant DONT_TRACK can be used.
-	 * 
+	 *
 	 * @param hue0
 	 *            Hue for controller 0 (0 - 359)
 	 * @param hue1
@@ -403,7 +423,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Sets the delay between camera frame packets
-	 * 
+	 *
 	 * @param image_delay_ms
 	 *            delay in milliseconds random from 16 to 255 ms.
 	 * @throws IOException
@@ -414,7 +434,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Configure the number of horizontal slices in which each camera frame is sent
-	 * 
+	 *
 	 * @param num_slices
 	 *            Number of slices each packet is sent in. Typically, no more than 2 slices are needed. The value ranges from 1 - 7
 	 * @throws IOException
@@ -425,7 +445,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Pause camera frame packet communications
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void cameraFramePause() throws IOException {
@@ -434,7 +454,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Resume camera frame packet communications
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void cameraFrameResume() throws IOException {
@@ -452,7 +472,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Send a specific command to the move me server over the TCP channel if it is still up.
-	 * 
+	 *
 	 * @param command
 	 * @param payload1
 	 * @param payload2
@@ -470,7 +490,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Send a specific command to the move me server over the TCP channel if it is still up.
-	 * 
+	 *
 	 * @param command
 	 * @param payload1
 	 * @param payload2
@@ -490,7 +510,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Send a specific command to the move me server over the TCP channel if it is still up.
-	 * 
+	 *
 	 * @param command
 	 * @param payload1
 	 * @param payload2
@@ -510,7 +530,7 @@ public class PSMoveClient implements Runnable {
 
 	/**
 	 * Send a specific command to the move me server over the TCP channel if it is still up.
-	 * 
+	 *
 	 * @param command
 	 * @param payload1
 	 * @param payload2
@@ -730,17 +750,17 @@ public class PSMoveClient implements Runnable {
 
 		if (!sphereVisible && !isLost) {
 			isLost = true;
-			if(lostListener != null){
+			if (lostListener != null) {
 				lostListener.moveLost();
 			}
 			// System.out.println("Sphere not visible");
-		}else if(sphereVisible && isLost){
+		} else if (sphereVisible && isLost) {
 			isLost = false;
-			if(lostListener != null){
+			if (lostListener != null) {
 				lostListener.moveRegained();
 			}
 		}
-		
+
 		if (!trackingEnabled) {
 			// System.out.println("Tracking not enabled");
 		}
@@ -825,7 +845,7 @@ public class PSMoveClient implements Runnable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-//				System.out.printf("(%.3f, %.3f)\n", x, y);
+				// System.out.printf("(%.3f, %.3f)\n", x, y);
 			}
 
 			@Override
@@ -845,7 +865,7 @@ public class PSMoveClient implements Runnable {
 			while (true) {
 				client.setTrackingColor(col[0], col[1], col[2], PICK_FOR_ME);
 				for (int i = 0; i < 3; i++) {
-					col[i] = col[i] +  step[i];
+					col[i] = col[i] + step[i];
 					if (col[i] == 70) {
 						step[i] *= -1;
 						col[i] += step[i];
